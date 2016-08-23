@@ -10,10 +10,11 @@ class Test(unittest.TestCase):
         fichero_repetido.tamanyo = 100
 
         directorio = Mock()
-        directorio.ruta = "./directorio_de_prueba"
-        directorio.ficheros = [fichero_repetido, fichero_repetido]
+        directorio.ficheros = [fichero_repetido, fichero_repetido, fichero_repetido]
 
         borrado = BorraFicheros()
+        directorio.ruta = "./directorio_de_prueba"
         borrado.borra_ficheros_en(directorio)
 
         directorio.borraFichero.assert_called_with(fichero_repetido)
+        self.assertEqual(directorio.borraFichero.call_count,2)
